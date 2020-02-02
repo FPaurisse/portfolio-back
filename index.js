@@ -11,7 +11,7 @@ app.use(
 );
 app.use(express.static('public'));
 
-app.get('/', async (req, res) => {
+app.get('/api/v1/', async (req, res) => {
     const message = await 'Hello World!';
     res.send(message);
 })
