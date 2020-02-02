@@ -13,6 +13,6 @@ jobs:
       - name: Deploy
         run: |
           sshpass -p ${{secrets.SSH_PASS}} ssh \
-          ${{secrets.SSH_USER}}@${{secrets.SSH_HOST}}:/var/www/portfolio/portfolio-back/ \
+          ${{secrets.SSH_USER }}@${{secrets.SSH_HOST}} \
           -o StrictHostKeyChecking=no \
           "bash -s" < ./deploy.sh
