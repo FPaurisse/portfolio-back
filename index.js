@@ -15,10 +15,7 @@ app.use(
 app.use(cors());
 app.use(express.static('public'));
 
-app.get('/api/v1/', async (req, res) => {
-    const message = await 'Hello World!';
-    res.send(message);
-})
+app.use('/api/v1', require('./router/messages'));
 
 app.listen(port, (err) => {
     if (err) {
