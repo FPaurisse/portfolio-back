@@ -39,6 +39,7 @@
     "eslint-plugin-react-hooks": "^1.7.0"
   },
   "dependencies": {
+    "cors": "^2.8.5",
     "express": "^4.17.1"
   }
 }
