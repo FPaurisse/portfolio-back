@@ -23,7 +23,7 @@ const works = [
     {
         "id": 3,
         "slug": slugify("Troisième titre", { lower: true }),
-        "title": "Second titre",
+        "title": "Troisième titre",
         "context": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
         "tools": ["JavaScript", "Node.js"],
         "categories": ["web"]
