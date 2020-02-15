@@ -22,8 +22,8 @@ const works = [
     },
     {
         "id": 3,
-        "slug": slugify("Second titre", { lower: true }),
-        "title": "Second titre",
+        "slug": slugify("Dernier titre", { lower: true }),
+        "title": "Dernier titre",
         "context": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
         "tools": ["JavaScript", "Node.js"],
         "categories": ["web"]
@@ -33,5 +33,4 @@ const works = [
 router.get('/', async (req, res) => {
     res.send(works);
 })
-
 module.exports = router;
