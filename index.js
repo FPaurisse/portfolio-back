@@ -18,9 +18,8 @@ app.use(express.static('public'));
 app.use('/api/v1/works', require('./router/works'));
 
 app.listen(port, (err) => {
-    if (err) {
-      throw new Error('Something bad happened...');
-    }
-    console.log(`Server is listening on ${port}`);
-  });
-  
+  if (err) {
+    throw new Error('Something bad happened...');
+  }
+  console.log(`Server is listening on ${port}`);
+});
