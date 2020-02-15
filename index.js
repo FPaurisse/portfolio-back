@@ -15,7 +15,7 @@ app.use(
 app.use(cors());
 app.use(express.static('public'));
 
-app.use('/api/v1', require('./router/messages'));
+app.use('/api/v1/works', require('./router/works'));
 
 app.listen(port, (err) => {
     if (err) {
