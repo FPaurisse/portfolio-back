@@ -7,7 +7,7 @@
     "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon index.js",
-   "sequelize": "sequelize"
+    "sequelize": "sequelize"
   },
   "author": "Frédéric Paurisse",
   "license": "ISC",
