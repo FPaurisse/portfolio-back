@@ -9,6 +9,29 @@ router.get('/', async (req, res) => {
   res.json(works);
 });
 
+const example = [
+  {
+    title: 'Premier titre',
+    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
+    tools: 'React.js, Node.js',
+    categories: 'web',
+  },
+];
+
+router.get('/create', async (req, res) => {
+  const work = new Work({
+    slug: slugify(example[0].title, { lower: true }),
+    title: example[0].title,
+    context: example[0].context,
+    tools: example[0].tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
+    categories: example[0].categories.split(/\s*,\s*/).map((category) => category.charAt(0).toUpperCase() + category.slice(1)),
+  });
+  await work.save();
+  // eslint-disable-next-line no-underscore-dangle
+  await Work.findByIdAndUpdate({ _id: work._id }, { id: work._id });
+  res.send(work);
+});
+
 router.post('/', async (req, res) => {
   const {
     title, context, tools, categories,
