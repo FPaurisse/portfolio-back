@@ -9,6 +9,24 @@ router.get('/', async (req, res) => {
   res.json(works);
 });
 
+router.post('/', async (req, res) => {
+  const {
+    title, context, tools, categories,
+  } = req.body;
+  const work = new Work({
+    slug: slugify(title, { lower: true }),
+    title,
+    context,
+    tools: tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
+    categories: categories.split(/\s*,\s*/).map((category) => category.charAt(0).toUpperCase() + category.slice(1)),
+  });
+  await work.save();
+  // eslint-disable-next-line no-underscore-dangle
+  await Work.findByIdAndUpdate({ _id: work._id }, { id: work._id });
+  res.send(work);
+});
+
+// DATA TEST
 const example = [
   {
     title: 'Premier titre',
@@ -32,21 +50,9 @@ router.get('/create', async (req, res) => {
   res.send(work);
 });
 
-router.post('/', async (req, res) => {
-  const {
-    title, context, tools, categories,
-  } = req.body;
-  const work = new Work({
-    slug: slugify(title, { lower: true }),
-    title,
-    context,
-    tools: tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
-    categories: categories.split(/\s*,\s*/).map((category) => category.charAt(0).toUpperCase() + category.slice(1)),
-  });
-  await work.save();
-  // eslint-disable-next-line no-underscore-dangle
-  await Work.findByIdAndUpdate({ _id: work._id }, { id: work._id });
-  res.send(work);
+router.get('/delete', async (req, res) => {
+  await Work.deleteOne();
+  res.send('Example deleted');
 });
 
 module.exports = router;
