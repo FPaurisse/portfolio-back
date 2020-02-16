@@ -2,35 +2,26 @@ const express = require('express');
 const slugify = require('slugify');
 
 const router = express.Router();
-
-const works = [
-  {
-    id: 1,
-    slug: slugify('Premier titre', { lower: true }),
-    title: 'Premier titre',
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-    tools: ['JavaScript', 'React.js'],
-    categories: ['web'],
-  },
-  {
-    id: 2,
-    slug: slugify('Second titre', { lower: true }),
-    title: 'Second titre',
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-    tools: ['JavaScript', 'React.js'],
-    categories: ['print'],
-  },
-  {
-    id: 3,
-    slug: slugify('Dernier titre', { lower: true }),
-    title: 'Dernier titre',
-    context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
-    tools: ['JavaScript', 'Node.js'],
-    categories: ['web'],
-  },
-];
+const Work = require('../models/Work.model');
 
 router.get('/', async (req, res) => {
-  res.send(works);
+  const works = await Work.find();
+  res.json(works);
 });
+
+router.post('/', async (req, res) => {
+  const {
+    title, context, tools, categories,
+  } = req.body;
+  const work = new Work({
+    slug: slugify(title, { lower: true }),
+    title,
+    context,
+    tools: tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
+    categories: categories.split(/\s*,\s*/).map((category) => category.charAt(0).toUpperCase() + category.slice(1)),
+  });
+  await work.save();
+  res.send(work);
+});
+
 module.exports = router;
