@@ -21,6 +21,7 @@ router.post('/', async (req, res) => {
     categories: categories.split(/\s*,\s*/).map((category) => category.charAt(0).toUpperCase() + category.slice(1)),
   });
   await work.save();
+  await Work.findByIdAndUpdate({ _id: work._id }, { id: work._id });
   res.send(work);
 });
 

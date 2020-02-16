@@ -1,6 +1,9 @@
 const mongoose = require('mongoose');
 
 const workSchema = new mongoose.Schema({
+  id: {
+    type: String,
+  },
   slug: {
     type: String,
     required: true,
