@@ -6,8 +6,8 @@ const router = express.Router();
 const works = [
   {
     id: 1,
-    slug: slugify('Développement web', { lower: true }),
-    title: 'Développement web',
+    slug: slugify('Premier titre', { lower: true }),
+    title: 'Premier titre',
     context: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.',
     tools: ['JavaScript', 'React.js'],
     categories: ['web'],
