@@ -2,7 +2,7 @@ const express = require('express');
 const slugify = require('slugify');
 
 const router = express.Router();
-const Work = require('../models/Work.model');
+const Work = require('../shemas/Work.model');
 
 router.get('/', async (req, res) => {
   const works = await Work.find();
