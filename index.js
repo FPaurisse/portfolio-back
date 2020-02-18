@@ -16,7 +16,7 @@ app.use(
 app.use(cors());
 app.use(express.static('public'));
 
-app.use('/api/v1/works', require('./router/works'));
+app.use('/api/v1/works', require('./api/works'));
 
 app.listen(port, () => {
   console.log(`Listening on ${port}`);
