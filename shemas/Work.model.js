@@ -12,6 +12,26 @@ const workSchema = new mongoose.Schema({
     type: String,
     required: true,
   },
+  image: {
+    type: String,
+    required: true,
+  },
+  primaryColor: {
+    type: String,
+    required: true,
+  },
+  secondaryColor: {
+    type: String,
+    required: true,
+  },
+  optionalColor: {
+    type: String,
+    required: true,
+  },
+  mockup: {
+    type: String,
+    required: true,
+  },
   context: {
     type: String,
     required: true,
