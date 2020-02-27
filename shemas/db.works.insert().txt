@@ -1,14 +1,58 @@
-db.works.insert({
+db.works.insertMany([{
   id: "1",
   slug: "rosebud",
   title: "Rosebud",
-  image: "http://",
+  image: "back_rosebud.jpg",
   primaryColor: "#F26157",
   secondaryColor: "#363635",
   optionalColor: "#DCDCCB",
-  mockup: "http://",
+  mockup: "rosebud.png",
   context: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
   tools: "JavaScript, React.js",
   categories: "web",
   createdAt: "2020-02-26T18:48:24.333Z"
-})
+},
+{
+  id: "2",
+  slug: "balance-ton-pere-noel",
+  title: "Balance ton Père-Noël",
+  image: "back_btpn.jpg",
+  primaryColor: "#1A408E",
+  secondaryColor: "#477048",
+  optionalColor: "#B26F48",
+  mockup: "btpn.png",
+  context: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
+  tools: "JavaScript, React.js",
+  categories: "web",
+  createdAt: "2020-02-26T18:48:24.333Z"
+},
+{
+  id: "3",
+  slug: "wine-note",
+  title: "Wine Note",
+  image: "back_winenote.jpg",
+  primaryColor: "#C99737",
+  secondaryColor: "#1E1E1E",
+  optionalColor: "#F7F4EA",
+  mockup: "winenote.png",
+  context: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
+  tools: "JavaScript, React.js",
+  categories: "web",
+  createdAt: "2020-02-26T18:48:24.333Z"
+},
+{
+  id: "4",
+  slug: "wild-green-school",
+  title: "Wild Green School",
+  image: "back_wgs.jpg",
+  primaryColor: "#45B781",
+  secondaryColor: "#ABC08E",
+  optionalColor: "#EEEEEE",
+  mockup: "wgs.png",
+  context: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation.",
+  tools: "JavaScript, React.js",
+  categories: "web",
+  createdAt: "2020-02-26T18:48:24.333Z"
+}
+]
+)
