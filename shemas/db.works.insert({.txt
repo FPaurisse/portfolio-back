@@ -1,5 +1,6 @@
 db.works.insert({
   id: "1",
+  slug: "rosebud",
   title: "Rosebud",
   image: "http://",
   primaryColor: "#F26157",
