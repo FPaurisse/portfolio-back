@@ -13,9 +13,7 @@ app.use(
     extended: true,
   }),
 );
-
-if (process.env.NODE_ENV === 'dev') { app.use(cors()); }
-
+app.use(cors());
 
 app.use(express.static('public'));
 
