@@ -12,7 +12,6 @@ jobs:
       - uses: actions/checkout@v1
       - name: Deploy
         run: |
-          ADMIN_URL=//admin.fredericpaurisse.fr/
           sshpass -p '${{secrets.SSH_PASS}}' ssh \
           ${{secrets.SSH_USER }}@${{secrets.SSH_HOST}} \
           -o "StrictHostKeyChecking=no" \
