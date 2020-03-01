@@ -24,8 +24,11 @@ router.get('/', async (req, res) => {
 
 router.get('/:slug', async (req, res) => {
   const { slug } = req.params;
-  const work = await Work.find({ slug });
-  res.json(work);
+  const work = await Work.findOne({ slug });
+  if (!work) {
+    return res.status(404).send('Work not found');
+  }
+  return work;
 });
 
 router.post('/', upload.any(), async (req, res) => {
