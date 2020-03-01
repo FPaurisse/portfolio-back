@@ -1,5 +1,6 @@
 require('dotenv').config();
 const express = require('express');
+const cors = require('cors');
 
 const connectDb = require('./config/connection');
 
@@ -12,6 +13,9 @@ app.use(
     extended: true,
   }),
 );
+
+if (process.env.NODE_ENV === 'dev') { app.use(cors()); }
+
 
 app.use(express.static('public'));
 
