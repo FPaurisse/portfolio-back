@@ -1,8 +1,7 @@
 const express = require('express');
 const slugify = require('slugify');
 const multer = require('multer');
-const sharp = require('sharp');
-const fs = require('fs');
+const imageConverter = require('../utils/imageConverter');
 
 const router = express.Router();
 const Work = require('../shemas/Work.model');
@@ -30,25 +29,15 @@ router.get('/:slug', async (req, res) => {
 });
 
 router.post('/', upload.any(), async (req, res) => {
-  const { files } = req;
-  req.files.map(async (file) => {
-    await sharp(file.path)
-      .resize(800, 800, {
-        fit: sharp.fit.inside,
-        withoutEnlargement: true,
-        progressive: true,
-      })
-      .toFormat('png')
-      .toFile(`public/uploads/${file.filename}.png`);
-    fs.unlink(`public/uploads/${file.filename}`, (err) => {
-      if (err) throw err;
-    });
-  });
-  const image = await files.find((file) => file.fieldname.includes('image'));
-  const mockup = await files.find((file) => file.fieldname.includes('mockup'));
   const {
     title, primaryColor, secondaryColor, optionalColor, context, tools, categories,
   } = req.body;
+  const { files } = req;
+
+  imageConverter(files);
+  const image = await files.find((file) => file.fieldname.includes('image'));
+  const mockup = await files.find((file) => file.fieldname.includes('mockup'));
+
   const work = new Work({
     title,
     slug: slugify(title, { lower: true }),
@@ -65,6 +54,44 @@ router.post('/', upload.any(), async (req, res) => {
   // eslint-disable-next-line no-underscore-dangle
   await Work.findByIdAndUpdate({ _id: work._id }, { id: work._id });
   res.send(work);
+});
+
+
+router.put('/:slug', upload.any(), async (req, res) => {
+  const { slug } = req.params;
+  const { files } = req;
+  const {
+    title, primaryColor, secondaryColor, optionalColor, context, tools, categories,
+  } = req.body;
+
+  const work = await Work.find({ slug });
+
+  let imagePath;
+  let mockupPath;
+  if (files) {
+    imageConverter(files);
+    const currentImage = await files.find((file) => file.fieldname.includes('image'));
+    const currentMockup = await files.find((file) => file.fieldname.includes('mockup'));
+    imagePath = currentImage && currentImage.path.replace('public/uploads', 'uploads').concat('.png');
+    mockupPath = currentMockup && currentMockup.path.replace('public/uploads', 'uploads').concat('.png');
+  }
+
+  const newWork = await Work.findOneAndUpdate({ slug },
+    {
+      title,
+      slug: slugify(title, { lower: true }),
+      image: imagePath || work[0].image,
+      primaryColor,
+      secondaryColor,
+      optionalColor,
+      mockup: mockupPath || work[0].mockup,
+      context,
+      tools: tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
+      categories: categories.split(/\s*,\s*/).map((category) => category.charAt(0).toUpperCase() + category.slice(1)),
+    }, {
+      new: true,
+    });
+  res.send(newWork);
 });
 
 module.exports = router;
