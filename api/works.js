@@ -28,7 +28,7 @@ router.get('/:slug', async (req, res) => {
   if (!work) {
     return res.status(404).send('Work not found');
   }
-  return work;
+  return res.json(work);
 });
 
 router.post('/', upload.any(), async (req, res) => {
