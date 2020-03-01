@@ -94,4 +94,10 @@ router.put('/:slug', upload.any(), async (req, res) => {
   res.send(newWork);
 });
 
+router.delete('/:id', async (req, res) => {
+  const { id } = req.params;
+  await Work.deleteOne({ id });
+  res.send(id);
+});
+
 module.exports = router;
