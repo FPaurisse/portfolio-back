@@ -33,7 +33,7 @@ router.get('/:slug', async (req, res) => {
 
 router.post('/', upload.any(), async (req, res) => {
   const {
-    title, primaryColor, secondaryColor, optionalColor, context, tools, categories,
+    title, primaryColor, secondaryColor, optionalColor, width, height, context, tools, categories,
   } = req.body;
   const { files } = req;
 
@@ -48,6 +48,8 @@ router.post('/', upload.any(), async (req, res) => {
     primaryColor,
     secondaryColor,
     optionalColor,
+    width,
+    height,
     mockup: mockup.path.replace('public/uploads', 'uploads').concat('.png'),
     context,
     tools: tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
@@ -64,7 +66,7 @@ router.put('/:slug', upload.any(), async (req, res) => {
   const { slug } = req.params;
   const { files } = req;
   const {
-    title, primaryColor, secondaryColor, optionalColor, context, tools, categories,
+    title, primaryColor, secondaryColor, optionalColor, width, height, context, tools, categories,
   } = req.body;
 
   const work = await Work.find({ slug });
@@ -87,6 +89,8 @@ router.put('/:slug', upload.any(), async (req, res) => {
       primaryColor,
       secondaryColor,
       optionalColor,
+      width,
+      height,
       mockup: mockupPath || work[0].mockup,
       context,
       tools: tools.split(/\s*,\s*/).map((tool) => tool.charAt(0).toUpperCase() + tool.slice(1)),
