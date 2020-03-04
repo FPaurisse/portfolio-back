@@ -18,7 +18,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 router.get('/', async (req, res) => {
-  const works = await Work.find();
+  const works = await Work.find().sort({ _id: 'desc' });
   res.json(works);
 });
 
