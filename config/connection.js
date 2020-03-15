@@ -7,4 +7,10 @@ const connectDb = () => mongoose.connect(
   { useNewUrlParser: true, useUnifiedTopology: true, useFindAndModify: false },
 );
 
-module.exports = connectDb;
+const connectMail = {
+  MAIL_HOST: process.env.MAIL_HOST,
+  MAIL_USER: process.env.MAIL_USER,
+  MAIL_PASS: process.env.MAIL_PASS,
+};
+
+module.exports = { connectDb, connectMail };
