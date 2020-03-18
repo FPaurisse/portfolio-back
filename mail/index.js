@@ -2,7 +2,10 @@ const express = require('express');
 
 const router = express.Router();
 const nodemailer = require('nodemailer');
+const multer = require('multer');
 const { connectMail } = require('../config/connection');
+
+const upload = multer();
 
 const transport = {
   host: process.env.MAIL_HOST,
