@@ -27,13 +27,15 @@ transporter.verify((error, success) => {
 });
 
 router.post('/', (req, res, next) => {
-  const { name, email, message } = req.body;
-  const content = `name: ${name} \n email: ${email} \n message: ${message} `;
+  const {
+    firstname, lastname, subject, message, email,
+  } = req.body;
+  const content = `name: ${firstname} ${lastname} \n email: ${email} \n subject: ${subject} \n message: ${message} `;
 
   const mail = {
-    from: `"${name}" <${email}>`,
+    from: `"${firstname} ${lastname}" <${email}>`,
     to: process.env.MAIL_USER,
-    subject: 'New Message from Contact Form',
+    subject,
     text: content,
   };
 
