@@ -8,8 +8,8 @@ const { connectMail } = require('../config/connection');
 const upload = multer();
 
 const transport = {
-  host: process.env.MAIL_HOST,
-  port: 465,
+  host: connectMail.MAIL_HOST,
+  port: connectMail.MAIL_PORT,
   auth: {
     user: connectMail.MAIL_USER,
     pass: connectMail.MAIL_PASS,
