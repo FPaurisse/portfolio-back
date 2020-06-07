@@ -9,7 +9,7 @@ const upload = multer();
 
 const transport = {
   host: process.env.MAIL_HOST,
-  port: 25,
+  port: 465,
   auth: {
     user: connectMail.MAIL_USER,
     pass: connectMail.MAIL_PASS,
